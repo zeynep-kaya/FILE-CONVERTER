@@ -1,0 +1,104 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="name">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="control_lang" name="lang" use="optional"/>
+          <xs:attribute type="control_second" name="second" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="period" type="xs:byte"/>
+  <xs:element name="quota">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:positiveInteger">
+          <xs:attribute type="xs:nonNegativeInteger" name="spec" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="field" type="control_field"/>
+  <xs:element name="last_min_score">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:nonNegativeInteger" name="order" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="grant" type="control_grant"/>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="period"/>
+        <xs:element ref="quota"/>
+        <xs:element ref="field"/>
+        <xs:element ref="last_min_score"/>
+        <xs:element ref="grant"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="faculty" use="optional"/>
+      <xs:attribute type="control_id" name="id" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="university">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="item" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="name" use="optional"/>
+      <xs:attribute type="control_uType" name="uType" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="departments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="university" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="control_lang">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="en"/>
+    <xs:enumeration value="tr"/>
+  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="control_second">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Yes"/>
+    <xs:enumeration value="No"/>
+  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="control_field">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="SAY"/>
+    <xs:enumeration value="SÖZ"/>
+    <xs:enumeration value="EA"/>
+    <xs:enumeration value="DİL"/>
+  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="control_grant">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="100"/>
+    <xs:enumeration value="50"/>
+    <xs:enumeration value="25"/>
+    <xs:enumeration value=""/>
+  </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="control_id">
+  <xs:restriction base="xs:int">
+    <xs:minInclusive value="99999999"/>
+    <xs:maxInclusive value="1000000000"/>
+  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="control_uType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="Devlet"/>
+    <xs:enumeration value="Vakıf"/>
+  </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
